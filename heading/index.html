@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Player Manager</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #0f172a, #1e3a8a);
+    color: white;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 900px;
+    margin: auto;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+form {
+    background: #1e293b;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+}
+
+input, select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 8px;
+    border-radius: 6px;
+    border: none;
+}
+
+button {
+    margin-top: 15px;
+    padding: 12px;
+    width: 100%;
+    background: #22c55e;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #16a34a;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #1e293b;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+th {
+    background: #334155;
+    padding: 12px;
+}
+
+td {
+    padding: 12px;
+    text-align: center;
+}
+
+tr:nth-child(even) {
+    background: #273449;
+}
+
+.logo {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>⚽ Player Manager</h1>
+
+    <form id="form">
+        <input type="text" id="name" placeholder="Player Name" required>
+        <input type="text" id="club" placeholder="Club" required>
+
+        <select id="position">
+            <option>Forward</option>
+            <option>Midfielder</option>
+            <option>Defender</option>
+            <option>Goalkeeper</option>
+        </select>
+
+        <input type="number" id="goals" placeholder="Goals">
+        <input type="number" id="assists" placeholder="Assists">
+        <input type="number" id="apps" placeholder="Appearances">
+        <input type="text" id="performance" placeholder="Recent Performance (e.g 9.0 rating)">
+
+        <!-- 🔥 YOUR CLUB BADGE -->
+        <label>Club Logo</label>
+        <input type="file" id="logo" accept="image/*">
+
+        <button>Add Player</button>
+    </form>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Logo</th>
+                <th>Name</th>
+                <th>Club</th>
+                <th>Position</th>
+                <th>Goals</th>
+                <th>Assists</th>
+                <th>Apps</th>
+                <th>Performance</th>
+            </tr>
+        </thead>
+        <tbody id="table"></tbody>
+    </table>
+</div>
+
+<script>
+document.getElementById("form").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    let name = document.getElementById("name").value;
+    let club = document.getElementById("club").value;
+    let position = document.getElementById("position").value;
+    let goals = document.getElementById("goals").value;
+    let assists = document.getElementById("assists").value;
+    let apps = document.getElementById("apps").value;
+    let performance = document.getElementById("performance").value;
+
+    let file = document.getElementById("logo").files[0];
+
+    let reader = new FileReader();
+
+    reader.onload = function() {
+        let row = `
+        <tr>
+            <td><img src="${reader.result}" class="logo"></td>
+            <td>${name}</td>
+            <td>${club}</td>
+            <td>${position}</td>
+            <td>${goals}</td>
+            <td>${assists}</td>
+            <td>${apps}</td>
+            <td>${performance}</td>
+        </tr>
+        `;
+
+        document.getElementById("table").innerHTML += row;
+    };
+
+    if (file) {
+        reader.readAsDataURL(file);
+    }
+
+    document.getElementById("form").reset();
+});
+</script>
+<html>
+<head>
+    <title>HTML div, img, ul, ol Example</title>
+</head>
+<body>
+
+    <div>
+        <h1>Welcome to My Page</h1>
+        <p>This is inside a div container.</p>
+    </div>
+
+    <div>
+        <h2>Image Example</h2>
+        <img src="https://via.placeholder.com/200" alt="Sample Image">
+    </div>
+
+    <div>
+        <h2>Unordered List (ul)</h2>
+        <ul>
+            <li>HTML</li>
+            <li>CSS</li>
+            <li>JavaScript</li>
+        </ul>
+    </div>
+
+    <div>
+        <h2>Ordered List (ol)</h2>
+        <ol>
+            <li>Wake up</li>
+            <li>Study HTML</li>
+            <li>Practice coding</li>
+        </ol>
+    </div>
+
+</body>
+</html>
